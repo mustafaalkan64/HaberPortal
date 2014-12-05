@@ -1,0 +1,59 @@
+﻿@model Best.Core.Domain.DbEntities.News
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Description = Model.ShortDescription;
+    ViewBag.Keywords = Model.TagNames;
+}
+
+@section Scripts{
+    
+}
+
+<div class="col-sm-8 news-detail">
+    <div class="news-detail-title">
+        <h2 title="@Model.Title">
+            <a href="@Url.Action("NewsDetail", "News", new { category = Model.Category.SeoName, id = Model.Id, title = Model.SeoTitle })"
+               id="news_@Model.Id">
+                @Model.Title
+            </a>
+        </h2>
+    </div>
+    <div class="news-detail-description">
+        @Model.ShortDescription
+    </div>
+    <hr />
+    <div class="news-detail-update-date">
+        <div class="col-sm-6">
+            Son Güncelleme : <strong>@String.Format("{0:dd/MM/yyyy HH:mm:ss}", Model.UpdateDate)</strong>
+        </div>
+    </div>
+    <hr />
+    <div class="news-detail-image">
+        <img src="~/@Model.ProfileImgUrlMiddle" alt="@Model.SeoTitle" />
+    </div>
+    <article class="news-detail-content">
+        @Html.Raw(Model.Content)
+    </article>
+    <div class="news-detail-source">
+        @Model.Source
+    </div>
+    <hr />
+    <div>
+        <strong>ETİKETLER</strong>
+    </div>
+    <div class="news-detail-tags">
+        @Model.TagNames
+    </div>
+    <hr />
+    <div class="news-detail-comments">
+        @Html.Partial("_Comments", new Best.Web.Models.CommentModel
+           {
+               Comments = Model.Comments.AsQueryable(),
+               NewsId = Model.Id
+           })
+    </div>
+</div>
+<div class="col-sm-4 featured-news" style="padding-top:0;">
+    @Html.Action("_MostReaded", "Home")
+</div>
+

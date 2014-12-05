@@ -1,0 +1,26 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.Galery>
+@{
+    ViewBag.Title = "Galeriler";
+    ViewBag.Description = "Fotoğraf Galerileri";
+    ViewBag.Keywords = "Foto Galeri";
+}
+
+@foreach (var item in Model)
+{
+    if (item.GaleryImages.Any())
+    {
+        <div class="col-sm-3 featured-news" style="padding: 0 15px 0 0;">
+            <a href="@Url.Action("GaleryDetail", "Galery", new { galeryName = item.Name, id = item.Id, seoName = item.SeoName })">
+                <div class="featured-news-item">
+                    <div class="col-xs-6 featured-news-title">
+                        @item.Name
+                    </div>
+                    <div class="col-xs-6 featured-news-image">
+                        <img src="~/@item.GaleryImages.FirstOrDefault().ImgUrlSmall" alt="@item.Name" />
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+}
+

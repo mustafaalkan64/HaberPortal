@@ -1,0 +1,17 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.News>
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("NewsDetail", "News", new { category = item.Category.SeoName, id = item.Id, title = item.SeoTitle })">
+        <div class="left-headline-item">
+            <div class="left-headline-image">
+                <img src="~/@item.ProfileImgUrlSmall" alt="@item.Title" />
+            </div>
+            <div class="left-headline-title-wrapper">
+            </div>
+            <div class="left-headline-title">
+                @item.Title
+            </div>
+        </div>
+    </a>
+}

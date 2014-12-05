@@ -1,0 +1,45 @@
+﻿@model Best.Web.Models.GaleryModel
+
+@{
+    ViewBag.Title = Model.Name;
+    var images = Model.GaleryImages.ToList();
+}
+
+@section Scripts{
+   
+}
+
+<h4>@TempData["GaleryName"]</h4>
+
+@using GridMvc.Html
+@Html.Grid(images).Columns(columns =>
+{
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => ProfileImage(x, images.IndexOf(x), images.Count()));
+}).WithPaging(1, 0, "gridPage")
+
+@helper ProfileImage(Best.Core.Domain.DbEntities.GaleryImage item, int index, int count)
+{
+    index += 2;
+
+    if (index > count)
+    {
+        index = 1;
+    }
+
+    ViewBag.Description = item.Description;
+
+    <div class="image-galery-item">
+        <div class="image-galery-item-img col-sm-8">
+            <a href="@Url.Action("GaleryDetail", "Galery", new { seoName = Model.SeoName })?gridPage=@index">
+                <img src="~/@(item.ImgUrlMiddle)" alt="@(item.Name)">
+            </a>
+        </div>
+        <div class="image-galery-item-desc col-sm-4">
+            @item.Description
+        </div>
+    </div>
+}
+@{
+    TempData["GaleryName"] = TempData["GaleryName"];
+}
+

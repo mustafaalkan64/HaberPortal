@@ -1,0 +1,56 @@
+﻿@model Best.Web.Models.EditCommentModel
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    $(function () {
+        $('#form_new_comment').submit(function (e) {
+            console.log("form submit");
+
+            e.preventDefault();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                beforeSend: function () {
+
+                },
+                complete: function () {
+
+                },
+                success: function (result) {
+                    if (result.redirectTo) {
+                        window.location.href = result.redirectTo;
+                    } else {
+                        $(".news-comment-new").html(result);
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+@using (Html.BeginForm("AddComment", "News", FormMethod.Post, new { id = "form_new_comment" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.NewsId)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CommentBody, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CommentBody, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CommentBody, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}

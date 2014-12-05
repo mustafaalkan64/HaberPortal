@@ -1,0 +1,32 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.Category>
+
+@foreach (var category in Model)
+{
+    var news = category.News.Where(x => x.IsPublished).OrderByDescending(x => x.Id).Take(4);
+
+    <div class="category-container">
+        <div class="category-header">
+            <a href="@Url.Action("CategoryDetail", "Category", new { id = category.Id, category = category.SeoName })">@category.Name</a>
+        </div>
+        <div class="category-body">
+            @foreach (var item in news)
+            {
+                <a href="@Url.Action("NewsDetail", "News", new { category = category.SeoName, id = item.Id, title = item.SeoTitle })">
+                    <div class="col-sm-3 category-news">
+                        <div class="category-news-image">
+                            <img src="~/@item.ProfileImgUrlSmall" alt="@item.SeoTitle" />
+                        </div>
+                        <div class="category-news-title">
+                            @item.Title
+                        </div>
+                        <div class="category-news-description">
+                            @item.ShortDescription
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+
+}
+

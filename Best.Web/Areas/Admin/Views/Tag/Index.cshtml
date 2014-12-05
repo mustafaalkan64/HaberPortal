@@ -1,0 +1,23 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.Tag>
+
+@{
+    ViewBag.Title = "Etiketler";
+}
+
+<a href='@Url.Action("AddTag", "Tag")' class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Yeni Etiket</a>
+<hr />
+
+@using GridMvc.Html
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => Edit(x));
+    columns.Add(column => column.Name).Titled("Etiket").Sortable(true);
+    columns.Add(column => column.Description).Titled("Açıklama").Sortable(true);
+}).WithPaging(20)
+
+@helper Edit(Best.Core.Domain.DbEntities.Tag tag)
+{
+    <a href='@Url.Action("EditTag", "Tag", new { id = tag.Id })' class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+}
+
+

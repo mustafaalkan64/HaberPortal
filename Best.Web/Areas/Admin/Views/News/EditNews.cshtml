@@ -1,0 +1,135 @@
+﻿@model Best.Web.Areas.Admin.Models.NewsModels.EditNewsModel
+
+@{
+    ViewBag.Title = "EditNews";
+}
+
+@using (Html.BeginForm("EditNews", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Haber Düzenle</h4>
+        <hr />
+        <img src="~/@(Model.ProfileImgUrl)" alt="@(Model.Title)" class="img-rounded" width="100" height="100">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProfileImg, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProfileImg, Best.Core.Domain.AppConstants.EditorDisplayTemplate_HttpPostedFileBase, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProfileImg, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, Best.Core.Domain.AppConstants.EditorDisplayTemplate_CKEditorTextArea, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Source, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Source, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Source, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryId,
+                new SelectList(Model.Categories, "Id", "Name"), "--- Kategori Seçiniz ---",
+                new { @class = "form-control chosen-single-select" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewsPositionId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NewsPositionId,
+                new SelectList(Model.NewsPositions, "Id", "Name"), "--- Pozisyon Seçiniz ---",
+                new { @class = "form-control chosen-single-select" })
+                @Html.ValidationMessageFor(model => model.NewsPositionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewsTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NewsTypeId,
+                new SelectList(Model.NewsTypes, "Id", "Name"), "--- Tip Seçiniz ---",
+                new { @class = "form-control chosen-single-select" })
+                @Html.ValidationMessageFor(model => model.NewsTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedTagIds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.SelectedTagIds,
+                new SelectList(Model.Tags, "Id", "Name"),
+                new { @class = "form-control chosen-multi-select", data_placeholder = "Etiketler..." })
+                @Html.ValidationMessageFor(model => model.SelectedTagIds, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedGaleryIds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.SelectedGaleryIds,
+                new SelectList(Model.Galeries, "Id", "Name"),
+                new { @class = "form-control chosen-multi-select", data_placeholder = "Galeriler..." })
+                @Html.ValidationMessageFor(model => model.SelectedGaleryIds, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AuthorId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.AuthorId,
+                new SelectList(Model.Authors, "Id", "UserName"), "--- Yazar Seçiniz ---",
+                new { @class = "form-control chosen-single-select" })
+                @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsPublished, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsPublished)
+                    @Html.ValidationMessageFor(model => model.IsPublished, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.ProfileImgUrl)
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+                <a href='@Url.Action("Index")' class="btn btn-default">Listeye geri dön</a>
+            </div>
+        </div>
+    </div>
+}

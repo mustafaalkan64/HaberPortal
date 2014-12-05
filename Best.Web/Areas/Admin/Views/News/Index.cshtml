@@ -1,0 +1,34 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.News>
+
+@{
+    ViewBag.Title = "Haberler";
+}
+
+<a href='@Url.Action("AddNews", "News")' class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Yeni Haber</a>
+<hr />
+
+@using GridMvc.Html
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => Edit(x));
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => ProfileImage(x));
+    columns.Add(column => column.Title).Titled("Başlık").Sortable(true).Filterable(true);
+    columns.Add(column => column.Category.Name).Titled("Kategori").Sortable(true).Filterable(true);
+    columns.Add(column => column.IsActive).Titled("Aktif").Sortable(true).Filterable(true);
+    columns.Add(column => column.IsPublished).Titled("Yayında").Sortable(true).Filterable(true);
+    columns.Add(column => column.ReadCount).Titled("Okunma").Sortable(true).Filterable(true);
+    columns.Add(column => column.CommentCount).Titled("Yorum").Sortable(true).Filterable(true);
+    columns.Add(column => column.NewsPosition.Name).Titled("Pozisyon").Sortable(true).Filterable(true);
+    columns.Add(column => column.NewsType.Name).Titled("Tip").Sortable(true).Filterable(true);
+}).WithPaging(20)
+
+@helper Edit(Best.Core.Domain.DbEntities.News news)
+{
+    <a href='@Url.Action("EditNews", "News", new { id = news.Id })' class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+}
+
+@helper ProfileImage(Best.Core.Domain.DbEntities.News news)
+{
+    <img src="~/@(news.ProfileImgUrlSmall)" alt="@(news.Title)" class="img-rounded" width="70" height="70">
+}
+

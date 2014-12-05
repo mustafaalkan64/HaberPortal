@@ -1,0 +1,29 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.Galery>
+
+@{
+    ViewBag.Title = "Galeriler";
+}
+
+<a href='@Url.Action("AddGalery", "Galery")' class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Yeni Galeri</a>
+<hr />
+
+@using GridMvc.Html
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => Edit(x));
+    columns.Add(column => column.Name).Titled("Galeri").Sortable(true);
+    columns.Add(column => column.Description).Titled("Açıklama").Sortable(true);
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => Images(x));
+}).WithPaging(20)
+
+@helper Edit(Best.Core.Domain.DbEntities.Galery galery)
+{
+    <a href='@Url.Action("EditGalery", "Galery", new { id = galery.Id })' class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+}
+
+@helper Images(Best.Core.Domain.DbEntities.Galery galery)
+{
+    <a href='@Url.Action("GaleryImages", "Galery", new { id = galery.Id, name = galery.Name , seoName = galery.SeoName})' class="btn btn-primary"><span class="glyphicon glyphicon-camera"></span></a>
+}
+
+

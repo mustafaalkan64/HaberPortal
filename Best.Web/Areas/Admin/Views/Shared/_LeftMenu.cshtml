@@ -1,0 +1,30 @@
+﻿<ul id="menu">
+    <li>
+        <a href="#"><span class="glyphicon glyphicon-list"></span> Kategori</a>
+        <ul class="sub_menu">
+            <li><a href="@Url.Action("Index","Category")"><span class="glyphicon glyphicon-list"></span> Kategoriler</a></li>
+            <li><a href="@Url.Action("AddCategory","Category")"><span class="glyphicon glyphicon-plus"></span> Kategori Ekle</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><span class="glyphicon glyphicon-globe"></span> Haber</a>
+        <ul class="sub_menu">
+            <li><a href="@Url.Action("Index","News")"><span class="glyphicon glyphicon-list"></span> Haberler</a></li>
+            <li><a href="@Url.Action("AddNews","News")"><span class="glyphicon glyphicon-plus"></span> Haber Ekle</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><span class="glyphicon glyphicon-tag"></span> Etiket</a>
+        <ul class="sub_menu">
+            <li><a href="@Url.Action("Index","Tag")"><span class="glyphicon glyphicon-list"></span> Etiketler</a></li>
+            <li><a href="@Url.Action("AddTag","Tag")"><span class="glyphicon glyphicon-plus"></span> Etiket Ekle</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><span class="glyphicon glyphicon-th-large"></span> Galeri</a>
+        <ul class="sub_menu">
+            <li><a href="@Url.Action("Index","Galery")"><span class="glyphicon glyphicon-list"></span> Galeriler</a></li>
+            <li><a href="@Url.Action("AddGalery", "Galery")"><span class="glyphicon glyphicon-plus"></span> Galeri Ekle</a></li>
+        </ul>
+    </li>
+</ul>

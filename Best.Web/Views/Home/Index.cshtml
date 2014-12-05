@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Anasayfa";
+    ViewBag.Description = "Haberleri Son dakika haberler";
+    ViewBag.Keywords = "Tarih, Edebiyat, Kültür, Bilim, Teknoloji, Sanat, Kadın, Yemek, Moda, Alış Veriş, Sağlık, Eğitim, Politika, Magazin, Otomobil, Evlilik, Ekonomi, Finans, Spor, Dünya, Oyun, Medya, Tv, Sosyal Medya";
+}
+
+<div class="headline">
+    <div class="col-sm-3 left-headline">
+        @*@Html.Action("_LeftHeadline", "Home")*@
+    </div>
+    <div class="col-sm-6 middle-headline">
+        @Html.Action("_MiddleHeadline", "Home")
+    </div>
+    <div class="col-sm-3 right-headline">
+        @Html.Action("_RightHeadline", "Home")
+    </div>
+</div>
+<div class="paging-buttons">
+</div>
+<hr class="seperator" />
+<div style="">
+    <div class="col-sm-8 news-by-category">
+        @Html.Action("_NewsByCategory", "Home")
+    </div>
+    <div class="col-sm-4 featured-news">
+        <div style="padding-top:10px;">
+            @Html.Action("_LastPhotoGalery", "Home")
+        </div>
+        <hr class="seperator" />
+        <div style="padding-top:10px;">
+            @Html.Action("_MostReaded", "Home")
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,52 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.GaleryImage>
+
+@{
+    ViewBag.Title = "Galeri Resimleri";
+}
+
+@using (Html.BeginForm("AddImages", "Galery", new { galeryId = ViewBag.GaleryId, galeryName = ViewBag.Name }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@ViewBag.Name</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Resim Ekle", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="images" name="images" multiple class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+                <a href='@Url.Action("Index")' class="btn btn-default">Listeye geri dön</a>
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+
+@using GridMvc.Html
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => ProfileImage(x));
+    columns.Add(column => column.Name).Titled("Galeri").Sortable(true);
+    columns.Add(column => column.Description).Titled("Açıklama").Sortable(true);
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(x => Edit(x));
+}).WithPaging(20)
+
+@helper ProfileImage(Best.Core.Domain.DbEntities.GaleryImage galeryImage)
+{
+    <img src="~/@(galeryImage.ImgUrlSmall)" alt="@(galeryImage.Name)" class="img-rounded" width="70" height="70">
+}
+
+@helper Edit(Best.Core.Domain.DbEntities.GaleryImage galeryImage)
+{
+    <a href='@Url.Action("EditGaleryImage", "Galery", new { id = galeryImage.Id, galeryId = ViewBag.GaleryId, galeryName = ViewBag.Name })' class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+}
+
+

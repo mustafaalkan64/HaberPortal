@@ -1,0 +1,19 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.News>
+
+<div class="featured-news-header">
+    <h5><b>ÇOK OKUNANLAR</b></h5>
+</div>
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("NewsDetail", "News", new { category = item.Category.SeoName, id = item.Id, title = item.SeoTitle })">
+        <div class="featured-news-item">
+            <div class="col-xs-7 featured-news-title">
+                @item.Title
+            </div>
+            <div class="col-xs-5 featured-news-image">
+                <img src="~/@item.ProfileImgUrlSmall" alt="@item.Title" />
+            </div>
+        </div>
+    </a>
+}

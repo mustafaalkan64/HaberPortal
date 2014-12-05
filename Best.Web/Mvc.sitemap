@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Anasayfa" controller="Home" action="Index" key="Home">
+    <mvcSiteMapNode title="Galeri" controller="Galery" action="Galeries" />
+    <mvcSiteMapNode title="Kategori" controller="Category" action="CategoryDetail" dynamicNodeProvider="Best.Web.Infrastructure.Extensions.CategoryDetailDynamicNodeProvider, Best.Web.Infrastructure" />
+    <mvcSiteMapNode title="Galeri" controller="Galery" action="GaleryDetail" dynamicNodeProvider="Best.Web.Infrastructure.Extensions.GaleryDetailDynamicNodeProvider, Best.Web.Infrastructure" />
+  </mvcSiteMapNode>
+</mvcSiteMap>

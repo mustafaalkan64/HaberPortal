@@ -1,0 +1,6 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.Category>
+
+@foreach (var item in Model)
+{
+    <li><a href="@Url.Action("CategoryDetail", "Category", new { id = item.Id, category = item.SeoName })">@item.Name</a></li>
+}

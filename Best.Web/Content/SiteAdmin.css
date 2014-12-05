@@ -1,0 +1,100 @@
+﻿
+/* main layouts */
+.body-content {
+    padding-top: 15px;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+a, a:active, a:visited, a:hover {
+}
+
+#header {
+}
+
+#body {
+    overflow: hidden;
+}
+
+#footer {
+}
+
+
+/* left menu */
+.left-menu {
+    background-color: #333;
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    top: 50px;
+    overflow-y: auto;
+   
+}
+
+ul#menu {
+}
+
+    ul#menu li {
+    }
+
+        ul#menu li a {
+            padding: 10px;
+            display: block;
+            color: #ccc;
+            border-bottom: 2px groove #444;
+        }
+
+            ul#menu li a:hover {
+                text-decoration: none;
+                background-color: #444;
+                color: #fff;
+            }
+
+    ul#menu .sub_menu {
+        background-color: #000;
+        display: none;
+    }
+
+        ul#menu .sub_menu li {
+        }
+
+            ul#menu .sub_menu li a {
+                padding: 10px 10px 10px 15px;
+                display: block;
+                color: #ccc;
+                border: none;
+            }
+
+                ul#menu .sub_menu li a:hover {
+                    text-decoration: none;
+                    background-color: #111;
+                    color: #fff;
+                }
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}

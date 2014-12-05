@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <title>Haber Portal - @ViewBag.Title</title>
+    <link rel="canonical" href="http://www.haberportal.net" />
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1 title="Haber Portal">@Html.ActionLink("Haber Portal", "Index", "Home", null, new { @class = "navbar-brand" })</h1>
+            </div>
+            <nav class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">KATEGORİLER <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            @Html.Action("_CategoriesMenu", "Home")
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("Galeries","Galery")">FOTO GALERİ</a></li>
+                </ul>
+                @Html.Action("_Login", "Account", true)
+            </nav>
+        </div>
+    </div>
+
+    <div id="body" class="container body-content">
+        @RenderBody()
+    </div>
+    <hr />
+    <footer id="footer">
+        <div class="container">
+            <div class="col-xs-6">
+                &copy; @DateTime.Now.Year - Haber Portal. Tüm hakları saklıdır.
+            </div>
+            <div class="col-xs-6" style="text-align:right;">
+                <a href="https://www.facebook.com/haberportal.net">
+                    <img src="~/Content/Images/icons/facebook.png" alt="facebook" />
+                </a>
+                <a href="https://plus.google.com/+HaberPortalNetPlus">
+                    <img src="~/Content/Images/icons/google-plus.png" alt="google plus" />
+                </a>
+                <a href="https://twitter.com/haberportal_net">
+                    <img src="~/Content/Images/icons/twitter.png" alt="twitter" />
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Scripts", false)
+</body>
+</html>

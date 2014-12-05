@@ -1,0 +1,16 @@
+﻿<ul class="nav navbar-nav" style="float:right;">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li><a href="#">@User.Identity.Name</a></li>
+        <li>@Html.ActionLink("Çıkış", "LogOff", "Account")</li>
+        if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Admin", "Index", "Dashboard", new { area = "Admin" }, null)</li>
+        }
+    }
+    else
+    {
+        <li>@Html.ActionLink("Kayıt Ol", "Register", "Account")</li>
+        <li>@Html.ActionLink("Giriş", "Login", "Account")</li>
+    }
+</ul>

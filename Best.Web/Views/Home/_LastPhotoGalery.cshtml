@@ -1,0 +1,22 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.Galery>
+
+<div class="featured-news-header">
+    <h5><b>SON EKLENEN GALERİLER</b></h5>
+</div>
+
+@foreach (var item in Model)
+{
+    if (item.GaleryImages.Any())
+    {
+        <a href="@Url.Action("GaleryDetail", "Galery", new { galeryName = item.Name, id = item.Id, seoName = item.SeoName })">
+            <div class="featured-news-item">
+                <div class="col-xs-7 featured-news-title">
+                    @item.Name
+                </div>
+                <div class="col-xs-5 featured-news-image">
+                    <img src="~/@item.GaleryImages.FirstOrDefault().ImgUrlSmall" alt="@item.Name" />
+                </div>
+            </div>
+        </a>
+    }
+}

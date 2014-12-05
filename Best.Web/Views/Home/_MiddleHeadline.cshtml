@@ -1,0 +1,43 @@
+﻿@model IQueryable<Best.Core.Domain.DbEntities.News>
+
+@{
+    var news = Model.ToList();
+}
+
+<script>
+    $(function () {
+        $(".slider-item").first().show();
+
+        $(document).on("mouseover", ".paging-buttons a", function () {
+            var newsId = $(this).data("newsid");
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".slider-item").hide();
+            $("#" + newsId).show();
+        });
+
+        @foreach (var item in news)
+	    {
+            <text>
+        $(".paging-buttons").append('<a href="' + '@Url.Action("NewsDetail", "News", new { category = item.Category.SeoName, id = item.Id, title = item.SeoTitle })' + '" data-newsid="news_' +@item.Id +'" style="margin-right:3px;" class="btn btn-default btn-sm @(news.IndexOf(item)==0?"active":"")">' +@(news.IndexOf(item) + 1) +'</a>');
+        </text>
+	    }
+    });
+</script>
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("NewsDetail", "News", new { category = item.Category.SeoName, id = item.Id, title = item.SeoTitle })"
+       id="news_@item.Id" class="slider-item" style="display:none;">
+        <div class="middle-headline-item">
+            <div class="middle-headline-image">
+                <img src="~/@item.ProfileImgUrlMiddle" alt="@item.Title" />
+            </div>
+            <div class="middle-headline-title-wrapper">
+
+            </div>
+            <div class="middle-headline-title">
+                @item.Title
+            </div>
+        </div>
+    </a>
+}

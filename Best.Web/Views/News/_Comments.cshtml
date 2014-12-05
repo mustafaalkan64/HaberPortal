@@ -1,0 +1,31 @@
+﻿@model Best.Web.Models.CommentModel
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="news-comment-new">
+        @Html.Partial("_NewComment", new Best.Web.Models.EditCommentModel
+    {
+        NewsId = Model.NewsId
+    })
+    </div>
+    <hr />
+}else
+{
+    <div>
+        Yorum eklemek için @Html.ActionLink("Giriş Yap", "Login","Account")
+    </div>
+}
+
+<div style="text-align:center;">
+    <strong>YORUMLAR</strong>
+</div>
+<hr />
+@foreach (var item in Model.Comments)
+{
+    <div class="news-comment">
+        <div class="news-comment-body">@item._Content</div>
+        <div class="news-comment-user">@item.User.UserName</div>
+    </div>
+}
+
+
